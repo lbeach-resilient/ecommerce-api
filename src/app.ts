@@ -1,11 +1,24 @@
+import { ApolloServer } from "apollo-server-express"
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core"
 import express from "express"
-const app = express()
-const port = 3000
+import http from "http"
+import SessionAPI from "../datasources/sessions"
+import { resolvers } from "../resolvers/demo"
+import { typeDefs } from "../schema/demo"
 
-app.get("/", (req, res) => {
-  res.send("Hello World!")
-})
-
-app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`)
-})
+async function startApolloServer(typeDefs, resolvers) {
+  const app = express()
+  const httpServer = http.createServer(app)
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    csrfPrevention: true,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  })
+  await server.start()
+  server.applyMiddleware({ app })
+  await new Promise<void>((resolve) =>
+    httpServer.listen({ port: 4000 }, resolve)
+  )
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+}
