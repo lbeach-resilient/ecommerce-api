@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lbeach-resilient/ecommerce-api/issues"
   },
-  "homepage": "https://github.com/lbeach-resilient/ecommerce-api#readme"
+  "homepage": "https://github.com/lbeach-resilient/ecommerce-api#readme",
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
 }
