@@ -2,23 +2,26 @@ import { ApolloServer } from "apollo-server-express"
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core"
 import express from "express"
 import http from "http"
-import SessionAPI from "../datasources/sessions"
-import { resolvers } from "../resolvers/demo"
-import { typeDefs } from "../schema/demo"
+import SessionAPI from "./datasources/sessions"
 
-async function startApolloServer(typeDefs, resolvers) {
+export default async function StartApolloServer(
+  port: number,
+  { typeDefs, resolvers }: any
+) {
   const app = express()
   const httpServer = http.createServer(app)
+  const dataSources = () => ({
+    SessionAPI: new SessionAPI(),
+  })
   const server = new ApolloServer({
     typeDefs,
     resolvers,
     csrfPrevention: true,
+    dataSources,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
   await server.start()
   server.applyMiddleware({ app })
-  await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve)
-  )
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve))
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 }
