@@ -1,10 +1,12 @@
-export const resolvers = {
-  Query: {
-    sessions: (parent: any, args: any, { dataSources }: any, info: any) => {
-      return dataSources.SessionAPI.getSessions(args)
-    },
-    sessionsBy: (parent: any, { id }: any, { dataSources }: any, info: any) => {
-      return dataSources.SessionAPI.getSessionsBy(id)
-    },
-  },
+import { Resolvers } from './types'
+
+export const resolvers: Resolvers = {
+    Query: {
+        sessions: (parent, args, { dataSources }) => {
+            return dataSources.SessionAPI.getSessions()
+        },
+        sessionsBy: (parent, { id }, { dataSources }) => {
+            return dataSources.SessionAPI.getSessionsBy(id)
+        }
+    }
 }

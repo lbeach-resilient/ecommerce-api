@@ -1,32 +1,35 @@
-import { sessions } from "../data"
-import { DataSource } from "apollo-datasource"
+import { sessions } from '../data'
+import { DataSource } from 'apollo-datasource'
 
-type Args = {
-  id?: number
-  title?: string
-  description?: string
-  startsAt?: string
-  endsAt?: string
-  speakers?: { id: string; name: string }[]
-  room?: string
-  day?: string
-  format?: string
-  track?: string
-  level?: string
+export type Session = {
+    id: number
+    title: string
+    description: string
+    startsAt: string
+    room: string
+    day: string
+    endsAt: string
+    format: string
+    level: string
+    track: string
 }
-export default class SessionAPI extends DataSource {
-  constructor() {
-    super()
-  }
 
-  initialize(_config: any) {}
+export type SessionAPIDataSource = DataSource & {
+    getSessions: () => Session[]
+    getSessionsBy: (id: string) => Session
+}
 
-  getSessions(args: Args) {
-    return sessions
-  }
-  getSessionsBy(id: string) {
-    const parsedId = parseInt(id)
-    const getSessions = sessions.filter((session) => parsedId === session.id)
-    return getSessions[0]
-  }
+export default class SessionAPI extends DataSource implements SessionAPIDataSource {
+    constructor() {
+        super()
+    }
+
+    getSessions() {
+        return sessions
+    }
+    getSessionsBy(id: string) {
+        const parsedId = parseInt(id)
+        const getSessions = sessions.filter((session) => parsedId === session.id)
+        return getSessions[0]
+    }
 }
