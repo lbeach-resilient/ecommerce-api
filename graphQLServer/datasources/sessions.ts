@@ -22,10 +22,9 @@ export default class SessionAPI extends DataSource {
   initialize(_config: any) {}
 
   getSessions(args: Args) {
-    const getSessions = sessions.filter((session) => args)
-    return getSessions
+    return sessions
   }
-  getSessionsById(id: string) {
+  getSessionsBy(id: string) {
     const parsedId = parseInt(id)
     const getSessions = sessions.filter((session) => parsedId === session.id)
     return getSessions[0]

@@ -2,19 +2,8 @@ import { gql } from "apollo-server-express"
 
 export const typeDefs = gql`
   type Query {
-    sessions(
-      id: ID
-      title: String
-      description: String
-      startsAt: String
-      endsAt: String
-      room: String
-      day: String
-      format: String
-      track: String
-      level: String
-    ): [Session]
-    sessionsById(id: ID): Session
+    sessions: [Session]
+    sessionsBy(id: ID): Session
   }
   type Session {
     id: ID!
@@ -25,7 +14,7 @@ export const typeDefs = gql`
     room: String
     day: String
     format: String
-    track: String @deprecated(reason: "TO Many")
+    track: String
     level: String
   }
 `
