@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 import express from 'express'
 import http from 'http'
-import SessionAPI from './datasources/sessions'
+import SessionAPI from './datasources/demo'
 import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
 
 type ApolloServerConfig = {

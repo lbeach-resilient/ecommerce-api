@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SessionAPIDataSource } from '../datasources/sessions'
+import { SessionAPIDataSource } from '../datasources/demo'
 
 type ResolverArgument<Arguments, Context> = (
     parent: any,
