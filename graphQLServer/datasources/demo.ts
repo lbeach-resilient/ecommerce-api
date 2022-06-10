@@ -1,4 +1,4 @@
-import { sessions } from '../data'
+import { sessions } from '../data/demo'
 import { DataSource } from 'apollo-datasource'
 
 export type Session = {
