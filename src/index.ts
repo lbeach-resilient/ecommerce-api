@@ -1,7 +1,7 @@
-import { resolvers } from "../graphQLServer/resolvers/demo"
-import { typeDefs } from "../graphQLServer/schema/demo"
-import StartApolloServer from "../graphQLServer"
-import "dotenv/config"
+import { resolvers } from '../graphQLServer/resolvers'
+import { typeDefs } from '../graphQLServer/schema'
+import StartApolloServer from '../graphQLServer'
+import 'dotenv/config'
 
 const port = parseInt(process.env.PORT)
 

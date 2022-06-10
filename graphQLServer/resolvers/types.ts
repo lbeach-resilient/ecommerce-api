@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SessionAPIDataSource } from '../datasources/demo'
+import { ProductAPIDataSource } from '../datasources/products'
 
 type ResolverArgument<Arguments, Context> = (
     parent: any,
@@ -9,14 +9,14 @@ type ResolverArgument<Arguments, Context> = (
 ) => any
 
 interface Query<Context> {
-    sessions: ResolverArgument<null, Context>
-    sessionsBy: ResolverArgument<{ id: string }, Context>
+    products: ResolverArgument<null, Context>
+    productById: ResolverArgument<{ id: string }, Context>
 }
 
 export type Resolvers = {
     Query: Query<{
         dataSources: {
-            SessionAPI: SessionAPIDataSource
+            ProductAPI: ProductAPIDataSource
         }
     }>
 }

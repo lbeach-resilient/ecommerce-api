@@ -2,7 +2,6 @@ import { ApolloServer } from 'apollo-server-express'
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 import express from 'express'
 import http from 'http'
-import SessionAPI from './datasources/demo'
 import ProductAPI from './datasources/products'
 import type { IExecutableSchemaDefinition } from '@graphql-tools/schema'
 
@@ -18,7 +17,6 @@ export default async function StartApolloServer(
     const app = express()
     const httpServer = http.createServer(app)
     const dataSources = () => ({
-        SessionAPI: new SessionAPI(), // demo/testing only
         ProductAPI: new ProductAPI()
     })
     const server = new ApolloServer({
